@@ -11,3 +11,4 @@ case object StartMatchmaking
 case object RequestMove
 case object GameStarted
 case class GameResult(winner: Option[Char])
+case class BoardState(board: Array[Array[Char]])

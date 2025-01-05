@@ -11,6 +11,8 @@ class Board {
     }
   }
 
+  def getBoardState: Array[Array[Char]] = board.map(_.clone())
+
   def checkWinner(): Option[Char] = {
     // Check rows, columns, and diagonals for a winner
     for (i <- 0 until 3) {

@@ -18,6 +18,9 @@ class PlayerActor(player: Player, matchmaker: ActorRef) extends Actor {
       val row = readLine("Enter row (0, 1, or 2): ").toInt
       val col = readLine("Enter column (0, 1, or 2): ").toInt
       sender() ! MakeMove(player.id, row, col)
+    case BoardState(board) =>
+      println(s"Current board state for ${player.name}:")
+      board.foreach(row => println(row.mkString(" ")))
     case GameResult(winner) =>
       winner match {
         case Some(symbol) => println(s"Player ${player.name}: Player $symbol wins!")

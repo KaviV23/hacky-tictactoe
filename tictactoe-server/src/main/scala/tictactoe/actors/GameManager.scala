@@ -26,6 +26,8 @@ class GameManager extends Actor {
       if (currentPlayer.contains(playerId)) {
         val symbol = if (players.keys.head == playerId) 'X' else 'O'
         gameBoard.makeMove(symbol, row, col)
+        val boardState = gameBoard.getBoardState
+        players.values.foreach(_ ! BoardState(boardState))
         val winner = gameBoard.checkWinner()
         println(s"Move made by: $playerId at ($row, $col), Winner: $winner")
         if (winner.isDefined || gameBoard.isFull()) {
