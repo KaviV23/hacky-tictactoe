@@ -1,16 +1,12 @@
 package tictactoe.actors
 
 import akka.actor.{Actor, ActorRef, Props}
-import tictactoe.PlayerClientUI
-
-import java.util.UUID
+import tictactoe.client.PlayerClientUI
 import tictactoe.model.Player
 import tictactoe.messages._
 
-import scala.io.StdIn.readLine
-
 class PlayerActor(player: Player, matchmaker: ActorRef) extends Actor {
-  def receive = {
+  def receive: Receive = {
     case StartMatchmaking =>
       matchmaker ! JoinQueue(player.id, self)
     case GameStarted =>

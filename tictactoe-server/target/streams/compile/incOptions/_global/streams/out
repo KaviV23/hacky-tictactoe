@@ -1,0 +1,34 @@
+[debug] Created transactional ClassFileManager with tempDir = C:\Users\kaviv\code\uni\DS_TICTACTOE_GITHUB\hacky-tictactoe\tictactoe-server\target\scala-2.13\classes.bak
+[debug] About to delete class files:
+[debug] We backup class files:
+[debug] Created transactional ClassFileManager with tempDir = C:\Users\kaviv\code\uni\DS_TICTACTOE_GITHUB\hacky-tictactoe\tictactoe-server\target\scala-2.13\classes.bak
+[debug] About to delete class files:
+[debug] We backup class files:
+[debug] Registering generated classes:
+[debug] 	JoinQueue.class
+[debug] 	JoinGame.class
+[debug] 	GameManager$$anonfun$receive$1.class
+[debug] 	JoinGame$.class
+[debug] 	GameManager$.class
+[debug] 	Board.class
+[debug] 	GameResult$.class
+[debug] 	Player$.class
+[debug] 	RequestMove.class
+[debug] 	StartMatchmaking$.class
+[debug] 	Matchmaker.class
+[debug] 	Matchmaker$$anonfun$receive$1.class
+[debug] 	StartMatchmaking.class
+[debug] 	GameServer$delayedInit$body.class
+[debug] 	GameResult.class
+[debug] 	MakeMove.class
+[debug] 	MakeMove$.class
+[debug] 	GameStarted$.class
+[debug] 	JoinQueue$.class
+[debug] 	GameServer.class
+[debug] 	Player.class
+[debug] 	GameServer$.class
+[debug] 	Matchmaker$.class
+[debug] 	RequestMove$.class
+[debug] 	GameManager.class
+[debug] 	GameStarted.class
+[debug] Removing the temporary directory used for backing up class files: C:\Users\kaviv\code\uni\DS_TICTACTOE_GITHUB\hacky-tictactoe\tictactoe-server\target\scala-2.13\classes.bak

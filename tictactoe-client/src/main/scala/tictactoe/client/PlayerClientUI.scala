@@ -1,4 +1,4 @@
-package tictactoe
+package tictactoe.client
 
 import akka.actor.{ActorRef, ActorSelection, ActorSystem, Props}
 import akka.pattern.ask
@@ -14,7 +14,6 @@ import scalafx.scene.text.Font
 import tictactoe.actors.PlayerActor
 import tictactoe.messages.{MakeMove, StartMatchmaking}
 import tictactoe.model.Player
-
 import java.util.UUID
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
