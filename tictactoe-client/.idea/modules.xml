@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tictactoe-client.iml" filepath="$PROJECT_DIR$/.idea/modules/tictactoe-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tictactoe-client-build.iml" filepath="$PROJECT_DIR$/.idea/modules/tictactoe-client-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tictactoe-client.tictactoe-client-build.iml" filepath="$PROJECT_DIR$/.idea/modules/tictactoe-client.tictactoe-client-build.iml" />
     </modules>
   </component>
 </project>

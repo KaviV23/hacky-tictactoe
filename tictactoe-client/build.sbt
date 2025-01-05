@@ -11,5 +11,6 @@ lazy val root = (project in file("."))
       "com.typesafe.akka" %% "akka-remote" % AkkaVersion,
       "com.typesafe.akka" %% "akka-cluster-typed" % AkkaVersion,
       "ch.qos.logback" % "logback-classic" % "1.2.3"
-    )
+    ),
+    libraryDependencies += "org.scalafx" %% "scalafx" % "18.0.1-R27"
   )
