@@ -69,7 +69,7 @@ object PlayerClientUI extends JFXApp {
   }
 
   // Initialize the Matchmaker ActorRef
-  val matchmakerSelection: ActorSelection = system.actorSelection("akka://TicTacToeServer@172.20.107.178:25555/user/matchmaker")
+  val matchmakerSelection: ActorSelection = system.actorSelection("akka://TicTacToeServer@localhost:25555/user/matchmaker")
 
   (matchmakerSelection ? akka.actor.Identify(0)).map {
     case akka.actor.ActorIdentity(_, Some(matchmakerRef)) =>
