@@ -10,4 +10,6 @@ case class MakeMove(playerId: UUID, row: Int, col: Int)
 case object StartMatchmaking
 case object RequestMove
 case object GameStarted
+case object InvalidMove
 case class GameResult(winner: Option[Char])
+case class BoardState(board: Array[Array[Char]])

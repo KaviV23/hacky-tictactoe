@@ -25,15 +25,23 @@ class GameManager extends Actor {
     case MakeMove(playerId, row, col) =>
       if (currentPlayer.contains(playerId)) {
         val symbol = if (players.keys.head == playerId) 'X' else 'O'
-        gameBoard.makeMove(symbol, row, col)
-        val winner = gameBoard.checkWinner()
-        println(s"Move made by: $playerId at ($row, $col), Winner: $winner")
-        if (winner.isDefined || gameBoard.isFull()) {
-          players.values.foreach(_ ! GameResult(winner))
+        val moveValid = gameBoard.makeMove(symbol, row, col)
+        if (moveValid) {
+          val boardState = gameBoard.getBoardState
+          players.values.foreach(_ ! BoardState(boardState))
+          val winner = gameBoard.checkWinner()
+          println(s"Move made by: $playerId at ($row, $col), Winner: $winner")
+          if (winner.isDefined || gameBoard.isFull()) {
+            players.values.foreach(_ ! GameResult(winner))
+          } else {
+            // Switch current player and request next move
+            currentPlayer = players.keys.find(_ != playerId)
+            requestNextMove()
+          }
         } else {
-          // Switch current player and request next move
-          currentPlayer = players.keys.find(_ != playerId)
-          requestNextMove()
+          println(s"Invalid move by: $playerId, position ($row, $col) is already taken.")
+          players(playerId) ! InvalidMove
+          requestNextMove() // Request the same player to make another move
         }
       } else {
         println(s"Invalid move by: $playerId, it's not their turn.")
@@ -43,6 +51,7 @@ class GameManager extends Actor {
 
   def requestNextMove(): Unit = {
     currentPlayer.foreach { playerId =>
+      print(s"requesting move from ${players(playerId)}")
       players(playerId) ! RequestMove
     }
   }

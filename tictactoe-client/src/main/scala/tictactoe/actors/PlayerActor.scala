@@ -1,27 +1,39 @@
 package tictactoe.actors
 
 import akka.actor.{Actor, ActorRef, Props}
-import tictactoe.client.PlayerClientUI
+import java.util.UUID
 import tictactoe.model.Player
 import tictactoe.messages._
+import tictactoe.client.PlayerClientUI
 
 class PlayerActor(player: Player, matchmaker: ActorRef) extends Actor {
-  def receive: Receive = {
+  var gameManager: ActorRef = _
+
+  def receive = {
     case StartMatchmaking =>
       matchmaker ! JoinQueue(player.id, self)
     case GameStarted =>
-      println(s"Player ${player.name} (${player.id}): Game has started!")
-      PlayerClientUI.setStatusLabelText("Game has started!")
+      gameManager = sender()
+      PlayerClientUI.setStatusLabelText(s"Player ${player.name} (${player.id}): Game has started!")
     case RequestMove =>
-      println(s"Player ${player.name} (${player.id}): It's your turn!")
-      PlayerClientUI.setStatusLabelText("It's your turn!")
-//      sender() ! MakeMove(player.id, row, col)
+      PlayerClientUI.setStatusLabelText(s"Player ${player.name} (${player.id}): It's your turn!")
+    case BoardState(board) =>
+      PlayerClientUI.updateBoard(board)
+    case InvalidMove =>
+      PlayerClientUI.setStatusLabelText(s"Invalid move, ${player.name}. Please try again.")
     case GameResult(winner) =>
       winner match {
-        case Some(symbol) => println(s"Player ${player.name}: Player $symbol wins!")
-        case None => println(s"Player ${player.name}: It's a draw!")
+        case Some(symbol) => PlayerClientUI.setStatusLabelText(s"Player ${player.name}: Player $symbol wins!")
+        case None => PlayerClientUI.setStatusLabelText(s"Player ${player.name}: It's a draw!")
       }
-    case _ => println("Unknown message")
+    case MakeMove(playerId, row, col) =>
+      if (gameManager != null) {
+        gameManager ! MakeMove(playerId, row, col)
+      } else {
+        println(s"GameManager is not set for player ${player.name}")
+      }
+    case msg =>
+      println(s"Unknown message: $msg")
   }
 }
 

@@ -12,7 +12,7 @@ import scalafx.scene.layout.{GridPane, VBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.Font
 import tictactoe.actors.PlayerActor
-import tictactoe.messages.{MakeMove, StartMatchmaking}
+import tictactoe.messages.{MakeMove, StartMatchmaking, BoardState}
 import tictactoe.model.Player
 import java.util.UUID
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -69,7 +69,7 @@ object PlayerClientUI extends JFXApp {
   }
 
   // Initialize the Matchmaker ActorRef
-  val matchmakerSelection: ActorSelection = system.actorSelection("akka://TicTacToeServer@localhost:25555/user/matchmaker")
+  val matchmakerSelection: ActorSelection = system.actorSelection("akka://TicTacToeServer@172.20.107.178:25555/user/matchmaker")
 
   (matchmakerSelection ? akka.actor.Identify(0)).map {
     case akka.actor.ActorIdentity(_, Some(matchmakerRef)) =>
@@ -103,6 +103,15 @@ object PlayerClientUI extends JFXApp {
   def setStatusLabelText(text: String): Unit = {
     Platform.runLater {
       statusLabel.text = text
+    }
+  }
+
+  def updateBoard(board: Array[Array[Char]]): Unit = {
+    Platform.runLater {
+      for (row <- 0 until 3; col <- 0 until 3) {
+        cells(row)(col).text = board(row)(col).toString
+        cells(row)(col).disable = board(row)(col) != '_'
+      }
     }
   }
 }

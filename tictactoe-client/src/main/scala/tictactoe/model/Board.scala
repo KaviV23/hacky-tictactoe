@@ -3,13 +3,16 @@ package tictactoe.model
 class Board {
   private val board: Array[Array[Char]] = Array.fill(3, 3)('_')
 
-  def makeMove(symbol: Char, row: Int, col: Int): Unit = {
+  def makeMove(symbol: Char, row: Int, col: Int): Boolean = {
     if (board(row)(col) == '_') {
       board(row)(col) = symbol
+      true
     } else {
-      println("Invalid move, spot already taken.")
+      false
     }
   }
+
+  def getBoardState: Array[Array[Char]] = board.map(_.clone())
 
   def checkWinner(): Option[Char] = {
     // Check rows, columns, and diagonals for a winner
